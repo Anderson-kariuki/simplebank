@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/Anderson-kariuki/simplebank/db/util"
+	"github.com/Anderson-kariuki/simplebank/util"
 	"github.com/go-playground/validator/v10"
 )
 

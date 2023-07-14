@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Anderson-kariuki/simplebank/db/util"
+	"github.com/Anderson-kariuki/simplebank/util"
 	_ "github.com/lib/pq"
 )
 
