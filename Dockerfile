@@ -8,14 +8,14 @@ RUN go build -o main main.go
 FROM alpine:3.18
 WORKDIR /app
 COPY --from=builder /app/main .
-COPY --from=builder /app/migrate.linux-amd64 ./migrate
 COPY app.env .
 COPY start.sh .
-COPY db/migration ./migration
+COPY wait-for.sh .
+COPY db/migration ./db/migration
 
 EXPOSE 8080
 CMD [ "/app/main" ]
-ENTRYPOINT [ "/app/start.sh" ]
+ENTRYPOINT [ " /app/start.sh" ]
 
 # run: docker build -t simplebank:latest .
 # then create a network using: docker network create bank-network
