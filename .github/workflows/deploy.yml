@@ -8,17 +8,17 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  web-deploy:
-    name: Deploy
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v2
-    
-    - name: Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: 172.105.56.254
-        username: root
-        password: Lectr0tel2023
-        server-dir: /Projects
+
+      - uses: actions/checkout@v2
+      - name: Deploy source-code
+        uses: appleboy/scp-action@master
+        env:
+          HOST: TEST_HOST
+          USERNAME: USERNAME
+          KEY: SSH_PRIVATE_KEY 
+        with:
+          source: "*"
+          target: "/Projects/simplebank"
