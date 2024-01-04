@@ -16,9 +16,9 @@ jobs:
       - name: Deploy source-code
         uses: appleboy/scp-action@master
         env:
-          HOST: TEST_HOST
-          USERNAME: USERNAME
-          KEY: SSH_PRIVATE_KEY 
+          HOST: ${{ secrets.TEST_HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
           source: "*"
           target: "/Projects/simplebank"
