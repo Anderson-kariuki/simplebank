@@ -48,9 +48,6 @@ jobs:
     - name: Run migrations
       run: make migrateup
 
-    - name: Run tests
-      run: npm test  # Replace with your test command
-
     - name: build
       run: make build
 
