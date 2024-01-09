@@ -1,18 +1,16 @@
 # This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
-name: Ci-test
+name: CI/CD Pipeline
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+    
 jobs:
-
-  test:
-    name: Test
+  build:
     runs-on: ubuntu-latest
 
     services:
@@ -50,5 +48,31 @@ jobs:
     - name: Run migrations
       run: make migrateup
 
-    - name: Test
-      run: make test
+    - name: Run tests
+      run: npm test  # Replace with your test command
+
+    - name: build
+      run: make build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H ${{ secrets.TEST_HOST }} >> ~/known_hosts
+
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # with:
+      #   source: "*"
+      #   target: "/Projects/simplebank"
+      # Add your deployment steps here, like copying files to a server, pushing to a hosting service, etc.
+
+# Add more jobs or steps as needed for your specific CI/CD workflow.
