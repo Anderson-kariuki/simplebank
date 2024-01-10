@@ -38,8 +38,7 @@ server:
 	go run main.go
 
 build:
-	go run main.go
-
+	go build main.go
 mock:
 	mockgen -package mockdb -destination db/mock/store.go github.com/Anderson-kariuki/simplebank/db/sqlc Store
 
