@@ -101,6 +101,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY}}
           script: |
-            cd Projects/simplebank
+            cd /Projects/simplebank
             docker-compose down
             docker-compose up -d
