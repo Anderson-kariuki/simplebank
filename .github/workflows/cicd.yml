@@ -69,6 +69,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      - name: Build with Docker Compose
+        run: docker-compose build
+
       - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
@@ -82,6 +85,15 @@ jobs:
           push: true
           tags: karis2/simplebank:latest
 
+      - name: Copy files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.TEST_HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: /Projects/simplebank
+
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
@@ -90,9 +102,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY}}
           script: |
             docker pull karis2/simplebank:latest
-            sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-            docker-compose --version
-            ls
+            cd Projects/simplebank
             docker-compose down
             docker-compose up -d
