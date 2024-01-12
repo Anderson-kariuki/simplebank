@@ -80,7 +80,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: your-dockerhub-username/your-image-name:latest
+          tags: karis2/simplebank:latest
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
