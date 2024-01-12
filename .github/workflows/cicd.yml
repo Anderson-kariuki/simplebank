@@ -87,7 +87,7 @@ jobs:
         with:
           host: ${{ secrets.TEST_HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.SSH_PRIVATE_KEY}}
+          key: ${{ secrets.SSH_PRIVATE_KEY}}
           script: |
             cd Projects/simplebank
             docker pull karis2/simplebank:latest
