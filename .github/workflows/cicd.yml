@@ -90,6 +90,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY}}
           script: |
             docker pull karis2/simplebank:latest
-            cd simplebank
             docker-compose down
             docker-compose up -d
